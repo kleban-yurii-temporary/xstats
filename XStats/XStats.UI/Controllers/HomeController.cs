@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using XStats.Repos;
 using XStats.UI.Models;
 
 namespace XStats.UI.Controllers
@@ -7,15 +8,17 @@ namespace XStats.UI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly LossesRepository lossesRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, LossesRepository lossesRepository)
         {
             _logger = logger;
+            this.lossesRepository = lossesRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string date = null)
         {
-            return View();
+            return View(await lossesRepository.GetDailyAsync());
         }
 
         public IActionResult Privacy()

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace XStats.Core.Migrations
 {
-    public partial class Init2 : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -178,6 +178,7 @@ namespace XStats.Core.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Count = table.Column<int>(type: "int", nullable: false),
                     TypeId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -196,8 +197,8 @@ namespace XStats.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "b79222ac-e4df-4f02-9ed8-92427755c3a7", "1bbed1f0-f3ab-4fa6-bfc0-19019813c0b3", "User", "USER" },
-                    { "da1a8b8d-bd1f-4c54-9be9-b9e1a01b9d6b", "6c36983f-a0ec-41c4-8a35-46e13974b7e0", "Admin", "ADMIN" }
+                    { "003e7c5f-9829-41b7-bea6-0b773f96d09e", "fe17c5f8-ac10-462c-8626-e01dfcac95dd", "User", "USER" },
+                    { "caae8c45-b5fa-44ee-86de-4b34ed037814", "5402a323-a370-4b59-be86-bec4c6e353a6", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -205,24 +206,43 @@ namespace XStats.Core.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "68726d30-07d4-4475-8fe7-e8767f77d3d1", 0, "344cebcd-c654-4e69-8104-acc08b16ee5e", "user@xstats.com", true, null, null, false, null, "USER@XSTATS.COM", "USER@XSTATS.COM", "AQAAAAEAACcQAAAAEAf1aAhY6xkpVwyF+9hF3Uy9DRZ8h6x8BhU8pcsdI9jSCCzjsNPRbUqyXYeIa9DYkA==", null, false, "a85e97d2-ec02-4f13-b836-421b4a4eb6ae", false, "user@xstats.com" },
-                    { "7d2ee0d3-ffcd-4306-bc51-6533e6212562", 0, "d7f3652d-9d8b-49a0-a1b4-4b6be63e6408", "admin@xstats.com", true, null, null, false, null, "ADMIN@XSTATS.COM", "ADMIN@XSTATS.COM", "AQAAAAEAACcQAAAAEBpQiojRR7Py5qMuQh1myiztvydR7XFHchIKpPXDXDj+GAN9UPEsX/8qVhx8+9Q/Hg==", null, false, "d1eb4ad7-e82a-43ff-adc7-f468de1daf3b", false, "admin@xstats.com" }
+                    { "d3ce8aca-55c4-47ca-ae20-cd2e3213081b", 0, "f276ace3-43a4-4596-ba75-2c568c113340", "admin@xstats.com", true, null, null, false, null, "ADMIN@XSTATS.COM", "ADMIN@XSTATS.COM", "AQAAAAEAACcQAAAAEFz70pJEXpmJTRYoz6jwLpx/xjgC7PDVp0y0Ph5/3qSNJYt477dHZ8mLaAwuqbychg==", null, false, "322c6395-1194-40cc-9869-309c4db93eea", false, "admin@xstats.com" },
+                    { "d5715b28-0319-4888-9111-611ee87b6e92", 0, "90f5bc73-81d7-4683-b3f7-ec9f52fed10f", "user@xstats.com", true, null, null, false, null, "USER@XSTATS.COM", "USER@XSTATS.COM", "AQAAAAEAACcQAAAAEH0mjB6l3+D/tOiG4dX4jVCP50K3o+4AAwrzHsP1r9iJyQk9XDmKyWupEhTBNMulUQ==", null, false, "ff0182d2-248d-47ac-917a-6b4bdce2735d", false, "user@xstats.com" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "EquipmentTypes",
+                columns: new[] { "Id", "FileTitle", "IconPath", "Order", "Title" },
+                values: new object[,]
+                {
+                    { 1, "aircraft", "Images\\eq\\aircraft.png", 1, "Літаки" },
+                    { 2, "helicopter", "Images\\eq\\helicopter.png", 2, "Гвинтокрили" },
+                    { 3, "drone", "Images\\eq\\drone.png", 3, "Дрони" },
+                    { 4, "anti-aircraft warfare", "Images\\eq\\anti-aircraft-warfare.png", 5, "ППО" },
+                    { 5, "cruise missiles", "Images\\eq\\cruise-missiles.png", 5, "Крилаті ракети" },
+                    { 6, "tank", "Images\\eq\\tank.png", 6, "Танки" },
+                    { 7, "APC", "Images\\eq\\apc.png", 7, "БТР" },
+                    { 8, "field artillery", "Images\\eq\\field-artillery.png", 8, "Артилерія" },
+                    { 9, "MLP", "Images\\eq\\mlr.png", 9, "РСЗВ" },
+                    { 10, "vehicles and fuel tanks", "Images\\eq\\vehicles-and-fuel-tanks.png", 10, "Техніка і цистерни з ПММ" },
+                    { 11, "naval ship", "Images\\eq\\naval-ship.png", 11, "Морські кораблі" },
+                    { 12, "special equipment", "Images\\eq\\special-equipment.png", 12, "Спец. обладнання" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "b79222ac-e4df-4f02-9ed8-92427755c3a7", "68726d30-07d4-4475-8fe7-e8767f77d3d1" });
+                values: new object[] { "caae8c45-b5fa-44ee-86de-4b34ed037814", "d3ce8aca-55c4-47ca-ae20-cd2e3213081b" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "da1a8b8d-bd1f-4c54-9be9-b9e1a01b9d6b", "68726d30-07d4-4475-8fe7-e8767f77d3d1" });
+                values: new object[] { "003e7c5f-9829-41b7-bea6-0b773f96d09e", "d5715b28-0319-4888-9111-611ee87b6e92" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "da1a8b8d-bd1f-4c54-9be9-b9e1a01b9d6b", "7d2ee0d3-ffcd-4306-bc51-6533e6212562" });
+                values: new object[] { "caae8c45-b5fa-44ee-86de-4b34ed037814", "d5715b28-0319-4888-9111-611ee87b6e92" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

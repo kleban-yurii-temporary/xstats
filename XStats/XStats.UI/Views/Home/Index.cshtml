@@ -1,4 +1,7 @@
-﻿@{
+﻿@using XStats.Core;
+
+@model List<DailyLosses>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +9,12 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<ul>
+    @foreach(var dl in Model) {
+        <p>
+            @dl.Type.Title: <strong>@dl.Count</strong>
+        </p>
+        <hr />
+    }
+</ul>
