@@ -1,0 +1,72 @@
+﻿.item-card {
+    height: 150px !important;
+}
+
+.item-card .card-body {
+    position: relative;
+    height: 150px !important;
+    padding: 0 !important;
+}
+
+    .item-card .card-body canvas {
+        height: 100px !important;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        bottom: 0px;
+        border-radius: 3px;
+        opacity: 0.8;
+        left: 0px;
+    }
+
+.item-card .num-block {
+    position: absolute;
+    width: 100%;
+    height: 70px;
+}
+
+    .item-card .num-block img {
+        height: 64px;
+        width: 64px;
+        position: absolute;
+        opacity: 0.6;
+        top: 7px;
+        left: 10px;
+        z-index: 3;
+    }
+
+.item-card:hover .num-block img {
+    opacity: 1;
+}
+
+.item-card .num-block h5 {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 27px;
+    z-index: 2;
+}
+
+.item-card .num-block h6 {
+    position: absolute;
+    top: 43px;
+    right: 10px;
+    font-size: 20px;
+    background: rgba(255, 00, 00, 0.7);
+    border-radius: 5px;
+    color: #fff;
+    padding: 2px 5px;
+    z-index: 2;
+}
+
+.item-card a.title {
+    position: absolute;
+    text-align: right;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    z-index: 3;
+    right: 10px;
+    bottom: 7px;
+    font-size: 12px;
+}

@@ -1,20 +1,148 @@
-﻿@using XStats.Core;
+﻿@using System.Globalization
+@using XStats.Core;
 
-@model List<DailyLosses>
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    Актуальна дата: <strong id="date">-</strong>
+</div>
+<br />
+<br />
+<hr />
+<br />
+<div class="item-content">
 </div>
 
-<ul>
-    @foreach(var dl in Model) {
-        <p>
-            @dl.Type.Title: <strong>@dl.Count</strong>
-        </p>
-        <hr />
-    }
-</ul>
+<hr />
+
+
+
+@section Scripts {
+
+    <link rel="stylesheet" href="~/css/card.css" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+
+    <script>
+
+        function LoadDate() {
+
+            $.ajax({
+                url: "/home/date",
+                type: "get",
+                success: function (result) {
+                    $("#date").html(result);
+                }
+            });
+
+        }
+
+
+        var colors = ["#00FFFF", "#32CD32", "#BA55D3", "#4B0082", "#A52A2A", "#4169E1", "#B22222"]
+
+        function updateMiniChart(eq_id, data) {
+
+            var color = colors[Math.floor(Math.random() * (colors.length - 1))];
+
+            let ctx = document.getElementById('chart' + eq_id).getContext('2d');
+
+            var gradient = ctx.createLinearGradient(0, 0, 120, 100);
+            gradient.addColorStop(0, 'rgba(229, 239, 255, 1)');
+            gradient.addColorStop(1, '#FFFFFF');
+
+            let chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.key,
+                    datasets: [
+                        {
+                            data: data.value,
+                            backgroundColor: '#EEE'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: false,
+                    legend: {
+                        display: false
+                    },
+                    elements: {
+                        line: {
+                            borderColor: color,
+                            borderWidth: 3
+                        },
+                        point: {
+                            radius: 0
+                        }
+                    },
+                    tooltips: {
+                        enabled: false
+                    },
+                    scales: {
+                        yAxes: [
+                            {
+                                display: false
+                            }
+                        ],
+                        xAxes: [
+                            {
+                                display: false
+                            }
+                        ]
+                    }
+                }
+            });
+        }
+
+        $(function () {
+
+            LoadDate();
+
+            $.ajax({
+                url: "/home/losses",
+                type: "get",
+                success: function (result) {
+
+                    var contentRow = "<div class='row'>";
+
+                    for (let i = 0; i < result.length; i++) {
+
+                        var content = "<div class='col-md-4 col-lg-2 col-6 col-sm-6 mb-5 item-card'><div class='card h-100 shadow'>";
+
+                        content += "<div class='card-body'><canvas id='chart" + result[i].type.id + "'></canvas><div class='num-block'>"
+                            + "<img src='eq/icon/" + result[i].type.id + "' alt='' />"
+                            + "<h5>" + result[i].count + "</h5>"
+                            + "<h6>+" + result[i].countPlus + "</h6></div>"
+                            + "<a href='/eq/details/" + result[i].id
+                            + "' class='title'>" + result[i].type.title + " <i class='bi bi-arrow-right'></i></a></div>";
+
+                        content += "</div></div>";
+
+                        contentRow += content;
+                    }
+
+                    contentRow += "</div>";
+
+                    $(".item-content").html(contentRow);
+
+                    for (let i = 0; i < result.length; i++) {
+
+                        $.ajax({
+                            url: "/home/geteqdata/" + result[i].type.id,
+                            type: "get",
+                            success: function (resultData) {
+                                console.log(resultData);
+                                updateMiniChart(result[i].type.id, resultData);
+
+                            }
+                        });
+
+                    }
+                }
+            });
+
+        })
+    </script>
+
+}

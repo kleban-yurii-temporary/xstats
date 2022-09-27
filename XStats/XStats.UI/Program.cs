@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using XStats.Core;
 using XStats.Repos;
 
@@ -15,9 +16,13 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<XStatsContext>();
 
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<UpdateRepository>();
 builder.Services.AddTransient<LossesRepository>();
+builder.Services.AddTransient<EqRepository>();
 
 var app = builder.Build();
 
