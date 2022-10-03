@@ -1,0 +1,43 @@
+﻿<h1>Оновлення даних</h1>
+<hr />
+
+<a href="#" class="btn btn-primary btn-update">Оновити</a>
+
+<br />
+<br />
+<div class="spinner-border text-primary status" style="display:none" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
+
+<div class="alert alert-info alert-messages">Тут будуть виведені результати оновлення...</div>
+
+@section Scripts {
+
+    <script>
+        $(function () {
+            $(".btn-update").click(function () {
+
+                $.ajax({
+                    url: '/update/run',
+                    type: 'post',
+                    beforeSend: function() {
+                        $(".status").fadeIn();
+                    },
+                    success: function(result) {
+                        var msgs = "<div>";
+                        for(let i = 0; i < result.length; i++) {
+                            msgs += "<div>" + result[i] + "</div>";
+                        }
+                        msgs += "</div>";
+
+                        $(".alert-messages").html(msgs);
+                        $(".status").fadeOut();
+                    }
+                });
+
+            });
+        });
+    </script>
+}
+
+

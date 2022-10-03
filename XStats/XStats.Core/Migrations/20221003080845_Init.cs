@@ -197,8 +197,8 @@ namespace XStats.Core.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "003e7c5f-9829-41b7-bea6-0b773f96d09e", "fe17c5f8-ac10-462c-8626-e01dfcac95dd", "User", "USER" },
-                    { "caae8c45-b5fa-44ee-86de-4b34ed037814", "5402a323-a370-4b59-be86-bec4c6e353a6", "Admin", "ADMIN" }
+                    { "abd46821-8e12-4889-85ee-f217b493a70b", "f7925722-dd3d-4670-8448-205f33cf138e", "Admin", "ADMIN" },
+                    { "ceb5d49f-7cec-4ad5-9ffe-900047b62ce4", "4cc8598f-5adc-4231-9569-482ebc20c08b", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -206,8 +206,8 @@ namespace XStats.Core.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "d3ce8aca-55c4-47ca-ae20-cd2e3213081b", 0, "f276ace3-43a4-4596-ba75-2c568c113340", "admin@xstats.com", true, null, null, false, null, "ADMIN@XSTATS.COM", "ADMIN@XSTATS.COM", "AQAAAAEAACcQAAAAEFz70pJEXpmJTRYoz6jwLpx/xjgC7PDVp0y0Ph5/3qSNJYt477dHZ8mLaAwuqbychg==", null, false, "322c6395-1194-40cc-9869-309c4db93eea", false, "admin@xstats.com" },
-                    { "d5715b28-0319-4888-9111-611ee87b6e92", 0, "90f5bc73-81d7-4683-b3f7-ec9f52fed10f", "user@xstats.com", true, null, null, false, null, "USER@XSTATS.COM", "USER@XSTATS.COM", "AQAAAAEAACcQAAAAEH0mjB6l3+D/tOiG4dX4jVCP50K3o+4AAwrzHsP1r9iJyQk9XDmKyWupEhTBNMulUQ==", null, false, "ff0182d2-248d-47ac-917a-6b4bdce2735d", false, "user@xstats.com" }
+                    { "464da071-399e-49be-95e3-1d60be7bf2f2", 0, "ea34ce42-c7e3-48f6-b409-09de37bcc488", "user@xstats.com", true, null, null, false, null, "USER@XSTATS.COM", "USER@XSTATS.COM", "AQAAAAEAACcQAAAAECXw3EF3AX3Kipc5qE2eIl8vcGBDLAZERE9OiqLl+pJRC9/jzWI1wIX+t+32jw9pDQ==", null, false, "63b9da3a-803d-418e-a298-3cd36625417c", false, "user@xstats.com" },
+                    { "a668281a-7839-4b71-879f-723f889edfe0", 0, "15227e94-195e-4404-a02f-4e0af18e7119", "admin@xstats.com", true, null, null, false, null, "ADMIN@XSTATS.COM", "ADMIN@XSTATS.COM", "AQAAAAEAACcQAAAAEFXyPbsb6AvXP1aVzHLl2OJUG1RPxeRaBGid/ZIGVNvo0crbg5HKCqip15UGphVdzQ==", null, false, "e3eb8f1c-322f-43e6-9be6-0272b65137cd", false, "admin@xstats.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -232,17 +232,17 @@ namespace XStats.Core.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "caae8c45-b5fa-44ee-86de-4b34ed037814", "d3ce8aca-55c4-47ca-ae20-cd2e3213081b" });
+                values: new object[] { "ceb5d49f-7cec-4ad5-9ffe-900047b62ce4", "464da071-399e-49be-95e3-1d60be7bf2f2" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "003e7c5f-9829-41b7-bea6-0b773f96d09e", "d5715b28-0319-4888-9111-611ee87b6e92" });
+                values: new object[] { "abd46821-8e12-4889-85ee-f217b493a70b", "a668281a-7839-4b71-879f-723f889edfe0" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "caae8c45-b5fa-44ee-86de-4b34ed037814", "d5715b28-0319-4888-9111-611ee87b6e92" });
+                values: new object[] { "ceb5d49f-7cec-4ad5-9ffe-900047b62ce4", "a668281a-7839-4b71-879f-723f889edfe0" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

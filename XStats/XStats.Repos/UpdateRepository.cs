@@ -11,6 +11,7 @@ using XStats.Repos.Dto;
 
 namespace XStats.Repos
 {
+
     public class UpdateRepository
     {
         private readonly XStatsContext _ctx;
@@ -38,11 +39,13 @@ namespace XStats.Repos
 
             var existing = _ctx.DailyLosses.ToList();
 
+            var messageList = new List<string>();
+
             foreach (var item in list)
             {
                 if (!existing.Any(x => x.Date == item.Date))
                 {
-                   // messageList.Add($"Додано дані за {item.Date.Value.ToString("dd.MM.yyyy")}.");
+                    messageList.Add($"Додано дані за {item.Date.Value.ToString("dd.MM.yyyy")}.");
 
                     await _ctx.DailyLosses.AddRangeAsync(new List<DailyLosses> {
                         new DailyLosses
@@ -124,7 +127,12 @@ namespace XStats.Repos
 
             await _ctx.SaveChangesAsync();
 
-            return new List<string> { url, $"count: {list.Count}" };
+            if(!messageList.Any())
+            {
+                messageList.Add($"Оновлення не відбулося. Інформація у базі даних актуальна!!!");
+            }
+
+            return messageList;
         }
     }
 }
