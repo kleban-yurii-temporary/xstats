@@ -4,6 +4,11 @@
 @{
 }
 
+<div class="float-end">
+    <a href="/users/create" class="btn btn-outline-primary">Додати користувача</a>
+</div>
+
+
 <h1>Список користувачів</h1>
 <hr />
 
@@ -21,14 +26,15 @@
         @foreach(var u in Model)
         {
             <tr>
-                <td>@u.FullName</td>
+                <td>@u.FirstName @u.LastName</td>
                 <td>@u.Email</td>
                 <td>@u.IsConfirmed</td>
                 <td>
                     @string.Join(", ", u.Roles.Select(x=> x.Name))
                 </td>
                 <td>
-                    <a href="#">btn 1</a>
+                    <a href="/users/edit/@u.Id" class="btn btn-warning">Редагувати</a>
+                    <a href="/users/delete/@u.Id" class="btn btn-danger">Видалити</a>
                 </td>
             </tr>
         }
